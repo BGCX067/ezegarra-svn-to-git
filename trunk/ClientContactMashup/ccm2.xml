@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>  
+	<ModulePrefs title="Google social search!" height="1050px">    
+	<Require feature="opensocial-0.7" />  
+</ModulePrefs>  
+<Content type="html">    
+<![CDATA[
+
+   <style type="text/css">
+ 
+    body {
+      background-color: white;
+      color: black;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      margin: 15px;
+    }
+ 
+    /*
+     * Highlight -siteSearch in results area
+     */
+ 
+    /* bold the section header */
+    .gsc-resultsRoot-siteSearch .gsc-title {
+      font-weight : bold;
+      font-size: 20px; 
+    }
+ 
+    .gsc-resultsRoot-siteSearch .gsc-keeper {
+      background-image : url('../../css/orange_check.gif');
+      font-weight : bold;
+    }
+ 
+ 
+    </style>
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript">
+    google.load('search', '1');
+    
+    function OnLoad() {     
+
+        // Create a search control
+        var searchControl = new google.search.SearchControl();
+        //searchControl.setLinkTarget(GSearch.LINK_TARGET_SELF);
+        //searchControl.setResultSetSize(GSearch.LARGE_RESULTSET);
+ 
+        // define searchresults draw area and preferences
+        var searchFormElement = document.getElementById("searchcontrol");
+        var drawOptions = new GdrawOptions();
+        drawOptions.setSearchFormRoot(searchFormElement);
+        drawOptions.setDrawMode(GSearchControl.DRAW_MODE_TABBED);
+
+      // site restricted web search with custom label
+      // and class suffix
+      var siteSearch = new google.search.WebSearch();
+      var options = new GsearcherOptions();
+      options.setExpandMode(GSearchControl.EXPAND_MODE_OPEN);
+      options.setRoot(document.getElementById("searchform"));
+      siteSearch.setUserDefinedLabel("LinkedIn");
+      siteSearch.setUserDefinedClassSuffix("siteSearch");
+      siteSearch.setSiteRestriction("linkedin.com");
+      searchControl.addSearcher(siteSearch, options);
+
+      // tell the searcher to draw itself and tell it where to attach
+      searchControl.draw(document.getElementById("searchcontrol")); 
+      // execute an inital search
+      searchControl.execute("\"Grady Booch\" IBM");
+    }
+ 
+    google.setOnLoadCallback(OnLoad, true);
+    </script>
+
+<div id="searchcontrol"/>
+<div id="searchform"/>
+
+]]> 
+</Content>
+</Module>

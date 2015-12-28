@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>  
+	<ModulePrefs 
+			title="Client Contact Mashup" 
+			width="400" 
+			height="500" 
+			author="ISS4I - IBM Software Services for IBM"
+			author_email="iss4i@us.ibm.com" 
+			description="Searchs digital footprint of an individual"
+			scrolling="true">    
+	<Require feature="opensocial-0.7" />  
+	<Require feature="dynamic-height"/>
+</ModulePrefs>  
+<Content type="html">    
+<![CDATA[
+
+ 
+	<head>
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript">
+
+    	google.load('search', '1');
+    
+    	function OnLoad() {
+
+	      	// Create a search control
+      		var searchControl = new google.search.SearchControl();
+
+		// create a searcher options object
+		// set up for open expansion mode
+		// load a searcher with these options
+		var options = new GsearcherOptions();
+		options.setExpandMode(GSearchControl.EXPAND_MODE_CLOSED);
+ 
+ 		// Web Search
+ 		var websearch = new google.search.WebSearch();
+ 		websearch.setUserDefinedLabel("Web");
+ 		websearch.setUserDefinedClassSuffix("webSearch");
+ 		searchControl.addSearcher(websearch);
+
+		// LinkedIn.com
+		var websearch = new google.search.WebSearch();
+		websearch.setUserDefinedLabel("Linked In");
+       	websearch.setSiteRestriction("http://www.linkedin.com");
+		searchControl.addSearcher(websearch);
+		
+		// MySpace.com
+		var websearch = new google.search.WebSearch();
+		websearch.setUserDefinedLabel("MySpace");
+       	websearch.setSiteRestriction("http://www.myspace.com");
+		searchControl.addSearcher(websearch);
+		
+		// facebook.com
+		var websearch = new google.search.WebSearch();
+		websearch.setUserDefinedLabel("Facebook");
+       	websearch.setSiteRestriction("http://www.facebook.com");
+		searchControl.addSearcher(websearch);
+		
+		// Twitter.com
+		var websearch = new google.search.WebSearch();
+		websearch.setUserDefinedLabel("Twitter");
+       	websearch.setSiteRestriction("http://www.twitter.com");
+		searchControl.addSearcher(websearch);	
+
+		// Technorati.com
+		var websearch = new google.search.WebSearch();
+		websearch.setUserDefinedLabel("Technorati");
+       	websearch.setSiteRestriction("http://technorati.com/");
+		searchControl.addSearcher(websearch);
+				
+		// Forums Search
+		var websearch = new google.search.WebSearch();
+		websearch.setUserDefinedLabel("Forums");
+		websearch.setSiteRestriction("000455696194071821846:community");
+		searchControl.addSearcher(websearch);
+	
+		// Blogs Search
+		var websearch = new google.search.BlogSearch();
+		websearch.setUserDefinedLabel("Blogs");
+		searchControl.addSearcher(websearch);
+
+		// News Search
+        var searcher = new GnewsSearch();
+        searcher.setUserDefinedLabel("News");
+        searchControl.addSearcher(searcher);
+
+		// Books Search
+        var searcher = new GbookSearch();
+        searcher.setUserDefinedLabel("Books");
+        searchControl.addSearcher(searcher);
+
+		// Patent Search
+        var searcher = new GpatentSearch();
+        searcher.setUserDefinedLabel("Patents");
+        searchControl.addSearcher(searcher);
+
+		// Video Search
+        var searcher = new GvideoSearch();
+        searcher.setUserDefinedLabel("Video");
+        searchControl.addSearcher(searcher);
+
+		// IBM Search
+		var websearch = new google.search.WebSearch();
+		websearch.setUserDefinedLabel("IBM");
+       	websearch.setSiteRestriction("http://www.ibm.com");
+		searchControl.addSearcher(websearch);
+        
+		// create a drawOptions object
+		var drawOptions = new GdrawOptions();
+
+	 	// tell the searcher to draw itself and tell it where to attach
+		//drawOptions.setDrawMode(GSearchControl.DRAW_MODE_LINEAR);
+		drawOptions.setDrawMode(GSearchControl.DRAW_MODE_TABBED);
+		searchControl.draw(document.getElementById("searchcontrol"), drawOptions);
+		
+      	// execute an inital search
+      	searchControl.execute("\"Grady Booch\" IBM");
+	}
+		
+    	google.setOnLoadCallback(OnLoad, true);
+
+    </script>
+
+	<style type="text/css">
+ 
+    	body {
+      		background-color: white;
+      		color: black;
+      		font-family: Arial, sans-serif;
+      		font-size: 13px;
+      		margin: 15px;
+    	}
+ 
+    	/*
+     	* Highlight -siteSearch in results area
+     	*/
+ 
+    	/* bold the section header */
+    	.gsc-resultsRoot-siteSearch .gsc-title {
+ 		font-weight : bold;
+		font-size: 20px; 
+    	}
+ 
+    	.gsc-resultsRoot-siteSearch .gsc-keeper {
+      		font-weight : bold;
+    	}
+ 
+	.gsc-control {
+		//width: 400px;
+	}
+
+    	</style>
+  </head>
+  <body>
+    <div id="searchcontrol"/>
+  </body>
+]]> 
+</Content>
+</Module>

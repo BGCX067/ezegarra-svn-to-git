@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>  
+	<ModulePrefs title="Google social search!" height="1050px">    
+	<Require feature="opensocial-0.7" />  
+</ModulePrefs>  
+<Content type="html">    
+<![CDATA[
+
+   <style type="text/css">
+ 
+    body {
+      background-color: white;
+      color: black;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      margin: 15px;
+    }
+ 
+    /*
+     * Highlight -siteSearch in results area
+     */
+ 
+    /* bold the section header */
+    .gsc-resultsRoot-siteSearch .gsc-title {
+      font-weight : bold;
+      font-size: 20px; 
+    }
+ 
+ 
+    </style>
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript">
+    google.load('search', '1');
+    
+    function OnLoad() {
+      // Dynamically load CSS to override defaults
+      var css = document.createElement('link');
+      css.href = '../../css/gsearch_green.css';
+      css.type = 'text/css';
+      css.rel = 'stylesheet';
+      document.getElementsByTagName('head')[0].appendChild(css);
+      
+      // Create a search control
+      var searchControl = new google.search.SearchControl();
+ 
+      // site restricted web search with custom label
+      // and class suffix
+      var siteSearch = new google.search.WebSearch();
+      siteSearch.setUserDefinedLabel("LinkedIn");
+      siteSearch.setUserDefinedClassSuffix("siteSearch");
+      siteSearch.setSiteRestriction("linkedin.com");
+      searchControl.addSearcher(siteSearch);
+ 
+      // site restricted web search using a custom search engine
+      siteSearch = new google.search.WebSearch();
+      siteSearch.setUserDefinedLabel("MySpace");
+      siteSearch.setUserDefinedClassSuffix("siteSearch");
+      siteSearch.setSiteRestriction("myspace.com");
+      searchControl.addSearcher(siteSearch);
+ 
+      // standard, unrestricted web search
+      //searchControl.addSearcher(new google.search.WebSearch());
+ 
+      // site restricted web search using a custom search engine
+      siteSearch = new google.search.WebSearch();
+      siteSearch.setUserDefinedLabel("Technorati");
+      siteSearch.setUserDefinedClassSuffix("siteSearch");
+      siteSearch.setSiteRestriction("technorati.com");
+      searchControl.addSearcher(siteSearch);
+ 
+      // site restricted blog search 
+//- blog search didn't seem to work
+      //var blogSearch = new google.search.BlogSearch();
+      //blogSearch.setUserDefinedLabel("Technorati");
+      //blogSearch.setSiteRestriction("technorati.com");
+      //searchControl.addSearcher(blogSearch);
+ 
+      // site restricted web search using a custom search engine
+      siteSearch = new google.search.WebSearch();
+      siteSearch.setUserDefinedLabel("Blogger.com");
+      siteSearch.setUserDefinedClassSuffix("siteSearch");
+      siteSearch.setSiteRestriction("blogger.com");
+      searchControl.addSearcher(siteSearch);
+      // site restricted blog search
+//- blog search didn't seem to work
+      //var blogSearch = new google.search.BlogSearch();
+      //blogSearch.setUserDefinedLabel("Blogger.com");
+      //blogSearch.setSiteRestriction("blogger.com");
+      //searchControl.addSearcher(blogSearch);
+ 
+      // site restricted web search using a custom search engine
+      siteSearch = new google.search.WebSearch();
+      siteSearch.setUserDefinedLabel("FaceBook");
+      siteSearch.setUserDefinedClassSuffix("siteSearch");
+      siteSearch.setSiteRestriction("facebook.com");
+      searchControl.addSearcher(siteSearch);
+ 
+      // site restricted web search using a custom search engine
+      siteSearch = new google.search.WebSearch();
+      siteSearch.setUserDefinedLabel("YouTube");
+      siteSearch.setUserDefinedClassSuffix("siteSearch");
+      siteSearch.setSiteRestriction("youtube.com");
+      searchControl.addSearcher(siteSearch);
+ 
+      // site restricted web search using a custom search engine
+      siteSearch = new google.search.WebSearch();
+      siteSearch.setUserDefinedLabel("Twitter");
+      siteSearch.setUserDefinedClassSuffix("siteSearch");
+      siteSearch.setSiteRestriction("twitter.com");
+      searchControl.addSearcher(siteSearch);
+ 
+      // site restricted news search
+      //var newsSearch = new google.search.NewsSearch();
+      //newsSearch.setUserDefinedLabel("Seattle Times");
+      //newsSearch.setSiteRestriction("Seattle Times");
+      //searchControl.addSearcher(newsSearch);
+ 
+      // Establish a keep callback
+      searchControl.setOnKeepCallback(null, DummyClipSearchResult);
+ 
+      // tell the searcher to draw itself and tell it where to attach
+      searchControl.draw(document.getElementById("searchcontrol"));
+ 
+      // execute an inital search
+      searchControl.execute("\"Grady Booch\" IBM");
+    }
+ 
+    function DummyClipSearchResult(result) {}
+ 
+    google.setOnLoadCallback(OnLoad, true);
+    </script>
+<div id="searchcontrol"/>
+
+]]> 
+</Content>
+</Module>
